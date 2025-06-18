@@ -1,0 +1,32 @@
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table{
+    width: 80%;
+}
+
+.modal{
+    z-index: 999;
+    position: fixed; /* Change absolute to fixed */
+    background: ivory;
+    padding: 1em;
+    width: 300px; /* Optional: Adjust width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+
+    /* Centering the modal */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.close-modal{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
