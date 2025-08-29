@@ -156,7 +156,6 @@ const UserView = () => {
                                             >
                                                 <option value="admin">Admin</option>
                                                 <option value="intern">Intern</option>
-                                                <option value="editor">Editor</option>
                                             </select>
                                         </div>
                                         <button type="submit" className="btn btn-success w-100">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/navbar/Navbar";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -47,7 +48,7 @@ const Register = () => {
                 console.log(res)
             } else {
                 alert("Registration successful!");
-                navigate("/login");
+                navigate("/manage");
             }
         } catch (err) {
             console.error("Error during registration:", err);
@@ -56,26 +57,26 @@ const Register = () => {
 
     return (
         <>
+            <Navbar/>
             <form onSubmit={handleSubmit} className="d-flex justify-content-center align-items-sm-center p-2" style={{ height: '92vh' }}>
                 <div className="d-flex flex-column gap-3 col-12 col-sm-3 p-sm-2">
-                    <h3>Sign Up</h3>
+                    <h3>Create Account</h3>
                     <div className="mb-3">
                         <label className="form-label">Name</label>
                         <input placeholder="Jonh Doe" onChange={handleChange} name="name" type="text" className="form-control" required />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Create Password</label>
-                        <input onChange={handleChange} name="createPassword" type="password" className="form-control" required />
+                        <input onChange={handleChange} name="createPassword" type="text" className="form-control" required />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Confirm Password</label>
-                        <input onChange={handleChange} name="confirmPassword" type="password" className="form-control" required />
+                        <input onChange={handleChange} name="confirmPassword" type="text" className="form-control" required />
                     </div>
                     {registerError === true && (
                         <span className="text-danger">{errorMessage}</span>
                     )}
                     <button type="submit" className="btn btn-primary">Sign Up</button>
-                    <span>Have an account? <a href="/login">Sign in here</a></span>
                 </div>
             </form>
         </>

@@ -24,45 +24,51 @@ const TasksCard = ({
   };
 
   return (
-    <div className="card shadow-sm" style={{ minHeight: "250px" }}>
+    <div className="card shadow-sm border-0 rounded-4 h-100">
       <div className="card-body d-flex flex-column justify-content-between">
-        <div>
-          <h5 className="text-uppercase card-title">{cardTitle}</h5>
-          <p className="card-text text-muted"
-            style={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: "vertical",
-              minHeight: "60px",
-              maxHeight: "60px",
-            }}
-          >
-            {cardDescription}
-          </p>
-          {status && (
-            <div className="mb-2">{formatStatus(status)}</div>
-          )}
-          {dueDate && (
-            <p className="card-text">
-              <small className="text-muted">
-                Due: {new Date(dueDate).toLocaleDateString()}
-              </small>
-            </p>
-          )}
+        {/* Title & Status */}
+        <div className="d-flex justify-content-between align-items-start mb-2">
+          <h5 className="card-title fw-bold text-uppercase">{cardTitle}</h5>
+          {status && formatStatus(status)}
         </div>
-        <div className="d-flex gap-2 flex-wrap">
-            <button onClick={() => navigate(`/task/${taskId}`)} className="btn-sm btn btn-info">
-              View
+
+        {/* Description */}
+        <p
+          className="card-text text-muted mb-3"
+          style={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+          }}
+        >
+          {cardDescription}
+        </p>
+
+        {/* Due Date */}
+        {dueDate && (
+          <p className="text-muted mb-3">
+            <small>Due: {new Date(dueDate).toLocaleDateString()}</small>
+          </p>
+        )}
+
+        {/* Buttons */}
+        <div className="mt-auto d-flex gap-2 flex-wrap">
+          <button
+            onClick={() => navigate(`/task/${taskId}`)}
+            className="btn btn-sm btn-info"
+          >
+            View
+          </button>
+          {user?.role === "admin" && typeof handleDelete === "function" && (
+            <button
+              onClick={() => handleDelete(taskId)}
+              className="btn btn-sm btn-outline-danger"
+            >
+              Delete
             </button>
-            {user?.role === "admin" && (
-              <>
-                {typeof handleDelete === "function" && (
-                    <button onClick={() => handleDelete(taskId)} className="btn-sm btn btn-outline-danger">Delete</button>
-                )}
-              </>
-            )}
+          )}
         </div>
       </div>
     </div>

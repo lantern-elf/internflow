@@ -60,8 +60,12 @@ const App = () => {
               <UserDetail />
             </ProtectedRoute>
           } />
+          <Route path="/register" element={
+            <ProtectedRoute requiredRole='admin'>
+              <Register />
+            </ProtectedRoute>
+          } />
           <Route path="/about" element={<About />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

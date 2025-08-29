@@ -34,7 +34,7 @@ const Tasks = () => {
       <Navbar tasks={true} />
       <div className="py-5" style={{ minHeight: "100vh" }}>
         <div className="container">
-          <h2 className="text-center mb-5 fw-bold text-primary">Finish your Tasks !</h2>
+          <h2 className="text-center mb-5 fw-bold">Finish your Tasks !</h2>
           <div className="row justify-content-center gx-4 gy-4">
             {tasks.length > 0 ? (
               tasks.map((task) => (

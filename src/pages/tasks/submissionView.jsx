@@ -41,7 +41,7 @@ const SubmissionView = () => {
     return (
         <>
             <Navbar manage={true} />
-            <div className="container mt-5">
+            <div className="container mt-4">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         {error ? (
@@ -54,7 +54,7 @@ const SubmissionView = () => {
                                     <h3 className="card-title mb-4">Submission Details</h3>
 
                                     <div className="mb-3">
-                                        <strong>User:</strong> <span className="text-muted">{data.user_name}</span>
+                                        <strong>Submitter:</strong> <span className="text-muted">{data.user_name}</span>
                                     </div>
 
                                     <div className="mb-3">

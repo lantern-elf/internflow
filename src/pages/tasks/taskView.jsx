@@ -143,8 +143,8 @@ const TaskView = () => {
     return (
         <>
             <Navbar manage={true} tasks={true} />
-            <div className="container py-5">
-                <div className="row justify-content-center">
+            <div className="container px-5 py-5">
+                <div className="d-flex justify-content-center gap-3">
                     {/* LEFT SIDE: Detail & Submission */}
                     <div className="col-md-4 d-flex flex-column gap-4">
                         {/* Task Detail Card */}
@@ -241,7 +241,7 @@ const TaskView = () => {
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Name</th>
-                                                <th>Role</th>
+                                                {/* <th>Role</th> */}
                                                 <th className="text-center">Task Status</th>
                                                 <th colSpan={2} className="text-center">Action</th>
                                             </tr>
@@ -252,7 +252,7 @@ const TaskView = () => {
                                                     <tr key={user.id}>
                                                         <td>{user.id}</td>
                                                         <td>{user.name}</td>
-                                                        <td className="text-capitalize">{user.role}</td>
+                                                        {/* <td className="text-capitalize">{user.role}</td> */}
                                                         <td align="center">{formatStatus(user.status)}</td>
                                                         <td align="center">
                                                             <button onClick={() => navigate(`/user/${user.id}`)} className="btn btn-info btn-sm">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
@@ -15,6 +15,8 @@ const Manage = () => {
         due_date: "",
         user_ids: [],
     });
+
+    const [disabled, setDisabled] = useState(false)
 
     const isFormValid = () => {
         const { title, description, due_date, user_ids } = newTask;
@@ -129,6 +131,40 @@ const Manage = () => {
         }
     };
 
+    const handleDisabled = async (id, role) => {
+        const changeValue = role === "disabled" ? "intern" : "disabled"
+
+        if (changeValue === "disabled") {
+            const confirmDelete = window.confirm("Are you sure you want to disable this user?");
+            if (!confirmDelete) return;
+        } else {
+            const confirmDelete = window.confirm("Are you sure you want to enable this user?");
+            if (!confirmDelete) return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:3001/disable_account", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    user_id : id,
+                    change : changeValue
+                }),
+            });
+    
+            const result = await response.json();
+            if (response.ok) {
+                fetchData()
+            } else {
+                console.error("Failed to update:", result.message);
+            }
+        } catch (error) {
+            console.error("Error updating:", error);
+        }
+    }
+
     return (
         <>
             <Navbar manage={true} />
@@ -137,26 +173,29 @@ const Manage = () => {
                     {/* Column 1: Users */}
                     <div className="col-md-4 border-end overflow-auto" style={{ height: '88vh' }}>
                         <h5 className="mb-3">Interns</h5>
-                        <table className="table table-light table-striped">
+                        <a className="" href="/register">Add Intern</a>
+                        <br /><br />
+                        <table className="small table table-light table-striped">
                             <thead>
-                                <tr>
+                                <tr className="align-middle">
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Role</th>
                                     <th>Created At</th>
-                                    <th colSpan="2" className="text-center">Action</th>
+                                    <th colSpan="3" className="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {users.length > 0 ? (
                                     users.map((user) => (
-                                        <tr key={user.id}>
+                                        <tr key={user.id} className={user.role === "disabled" ? `table-danger` : ``}>
                                             <td>{user.id}</td>
                                             <td>{user.name}</td>
                                             <td className="text-capitalize">{user.role}</td>
                                             <td>{new Date(user.created_at).toLocaleDateString()}</td>
                                             <td align="center"><button onClick={() => navigate(`/user/${user.id}`)} className="btn btn-info btn-sm">View</button></td>
                                             <td align="center"><button disabled={user.role === 'admin'} onClick={() => handleDeleteUser(user.id)} className="btn btn-danger btn-sm">Delete</button></td>
+                                            <td align="center"><button disabled={user.role === 'admin'} onClick={() => handleDisabled(user.id, user.role)} className={user.role === "disabled" ? `btn btn-info btn-sm` : `btn-warning btn btn-sm`}>{user.role === "disabled" ? `Enable` : `Disable`}</button></td>
                                         </tr>
                                     ))
                                 ) : (
@@ -171,7 +210,7 @@ const Manage = () => {
                         <h5 className="mb-3">Tasks</h5>
                         <div className="flex-grow-1 overflow-auto">
                             <div
-                            className="d-grid"
+                            className="gap-3 d-grid"
                             style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))' }}
                             >
                             {tasks.length > 0 ? (
