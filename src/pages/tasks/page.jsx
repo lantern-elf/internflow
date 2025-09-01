@@ -13,11 +13,11 @@ const Tasks = () => {
         const res = await fetch(`http://localhost:3001/tasks/user/${user.id}`);
         const result = await res.json();
 
-        const taskData = result[0]?.payload?.data;
+        const taskData = result?.payload?.data;
         if (taskData) {
           setTasks(taskData);
         } else {
-          console.error("Failed to fetch tasks:", result[0]?.message || "No data found");
+          console.error("Failed to fetch tasks:", result?.message || "No data found");
         }
       } catch (err) {
         console.error("Error fetching tasks:", err);

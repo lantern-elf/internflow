@@ -12,7 +12,7 @@ const UserDetail = () => {
                 const response = await fetch(`${API_URL}/${id}`);
                 const result = await response.json();
                 if (result) {
-                    setUser(result[0].payload.data[0]);
+                    setUser(result.payload.data[0]);
                     console.log(result)
                 }
             } catch (error) {

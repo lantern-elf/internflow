@@ -18,9 +18,9 @@ const TaskView = () => {
             const response = await fetch(`http://localhost:3001/task/${id}`);
             const result = await response.json();
             if (result) {
-                const data = result[0].payload.data;
+                const data = result.payload.data;
                 setTask(data);
-                console.log(result[0].payload.data)
+                console.log(result.payload.data)
                 setUserAssign(data?.assigned_users || [])
             }
         } catch (error) {
@@ -97,7 +97,7 @@ const TaskView = () => {
                 fetchUsertaskStatus()
                 setSubmission(""); // Clear form
             } else {
-                console.error("Failed to submit:", result[0]?.payload.message);
+                console.error("Failed to submit:", result?.payload.message);
             }
         } catch (error) {
             console.error("Error submitting:", error);
@@ -117,7 +117,7 @@ const TaskView = () => {
             if (!response.ok) {
                 return
             }
-            setTaskStatus(result[0].payload.data.status)
+            setTaskStatus(result.payload.data.status)
         } catch (error) {
             console.error("Error fetching status:", error);
         }

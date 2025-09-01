@@ -39,8 +39,8 @@ const Manage = () => {
                 resTasks.json()
             ]);
 
-            const userData = resultUsers[0]?.payload?.data;
-            const taskData = resultTasks[0]?.payload?.data;
+            const userData = resultUsers?.payload?.data;
+            const taskData = resultTasks?.payload?.data;
 
             if (userData && taskData) {
                 setUsers(userData);

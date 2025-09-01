@@ -19,7 +19,7 @@ const UserView = () => {
             try {
                 const response = await fetch(`${API_URL}/${id}`);
                 const result = await response.json();
-                const userData = result?.[0]?.payload?.data?.[0];
+                const userData = result?.payload?.data?.[0];
                 if (userData) setUser(userData);
                 else console.error("User not found");
             } catch (error) {
@@ -42,7 +42,7 @@ const UserView = () => {
             try {
                 const res = await fetch(`http://localhost:3001/tasks/user/${id}`);
                 const taskResult = await res.json();
-                const taskData = taskResult?.[0]?.payload?.data;
+                const taskData = taskResult?.payload?.data;
                 if (taskData) setTasks(taskData);
                 else console.error("No task data found");
             } catch (err) {

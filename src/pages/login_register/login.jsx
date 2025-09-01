@@ -30,15 +30,16 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
 
+      
       const data = await response.json();
-
+      
       if (!data.ok) {
         setLoginError(true);
-        setErrorMessage(data[0].payload.message);
+        setErrorMessage(data.payload.message);
       }
 
-      if (data[0]?.payload?.data) {
-        const { id, name, role } = data[0].payload.data;
+      if (data?.payload?.data) {
+        const { id, name, role } = data.payload.data;
         login({ id, name, role });
         navigate("/home");
       }
@@ -48,6 +49,7 @@ const Login = () => {
         password: "",
       });
     } catch (error) {
+      console.log(error);
       setLoginError(true);
       setErrorMessage("Internal Error");
     }

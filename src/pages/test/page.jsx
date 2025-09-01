@@ -25,8 +25,8 @@ const Test = () => {
         try {
             const response = await fetch(API_URL);
             const result = await response.json();
-            if (result[0]?.payload?.data) {
-                setUsers(result[0].payload.data);
+            if (result?.payload?.data) {
+                setUsers(result.payload.data);
             }
         } catch (error) {
             console.error("Error fetching users:", error);
@@ -86,8 +86,8 @@ const Test = () => {
 
             console.log("Full API Response:", result);
             
-            if (Array.isArray(result[0]?.payload?.data) && result[0].payload.data.length > 0) {
-                const userData = result[0].payload.data[0]; // Select the first object
+            if (Array.isArray(result?.payload?.data) && result.payload.data.length > 0) {
+                const userData = result.payload.data[0]; // Select the first object
                 console.log("User Data Found (Before Set State):", userData);
 
                 setUserDataToEdit(userData);

@@ -17,8 +17,8 @@ const SubmissionView = () => {
                     throw new Error(result?.payload?.message || "Unknown error");
                 }
 
-                setData(result[0].payload.data);
-                console.log(result[0].payload.data)
+                setData(result.payload.data);
+                console.log(result.payload.data)
             } catch (err) {
                 setError(err.message);
             }
