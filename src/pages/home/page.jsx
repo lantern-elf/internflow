@@ -26,7 +26,7 @@ const Home = () => {
             const res = await fetch("http://localhost:3001/users");
             const result = await res.json();
 
-            const data = result?.[0]?.payload?.data;
+            const data = result?.payload?.data;
             if (Array.isArray(data)) {
                 const interns = data.filter((user) => user.role === "intern");
                 setTotalInterns(interns.length);
@@ -43,7 +43,7 @@ const Home = () => {
             const res = await fetch("http://localhost:3001/tasks");
             const result = await res.json();
 
-            const taskList = result?.[0]?.payload?.data;
+            const taskList = result?.payload?.data;
             if (!Array.isArray(taskList)) {
                 console.error("Unexpected task list structure:", result);
                 return;
@@ -56,7 +56,7 @@ const Home = () => {
                 taskList.map(async (task) => {
                     const res = await fetch(`http://localhost:3001/task/${task.id}`);
                     const taskResult = await res.json();
-                    return taskResult?.[0]?.payload?.data?.assigned_users || [];
+                    return taskResult?.payload?.data?.assigned_users || [];
                 })
             );
 
@@ -75,7 +75,7 @@ const Home = () => {
         try {
             const res = await fetch(`http://localhost:3001/tasks/user/${id}`);
             const result = await res.json();
-            const taskData = result?.[0]?.payload?.data;
+            const taskData = result?.payload?.data;
 
             if (Array.isArray(taskData)) {
                 setTasks(taskData);
