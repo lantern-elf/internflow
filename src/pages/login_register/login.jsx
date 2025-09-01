@@ -34,11 +34,11 @@ const Login = () => {
 
       if (!data.ok) {
         setLoginError(true);
-        setErrorMessage(data[0].payload.message);
+        setErrorMessage(data.payload.message);
       }
 
-      if (data[0]?.payload?.data) {
-        const { id, name, role } = data[0].payload.data;
+      if (data?.payload?.data) {
+        const { id, name, role } = data.payload.data;
         login({ id, name, role });
         navigate("/home");
       }
